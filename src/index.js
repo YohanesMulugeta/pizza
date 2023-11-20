@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import pizzaData from './data';
-import Pizza from './components/Pizza';
+import Header from './components/Header';
+import Menu from './components/Manu';
+import Footer from './components/Footer';
 
 function App() {
-  const pizzas = pizzaData.map((pizza) => <Pizza pizza={pizza} key={pizza.name} />);
-
   return (
     <div>
-      <h1>Hello React!</h1>
-      {pizzas}
+      <Header />
+      <Menu />
+      <Footer />
     </div>
   );
 }
