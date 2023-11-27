@@ -7,8 +7,24 @@ function Footer() {
 
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString()} We Currently {isOpen ? 'Open' : 'Closed'}!
+      {/* {new Date().toLocaleTimeString()} We Currently {isOpen ? 'Open' : 'Closed'}! */}
+      {isOpen ? (
+        <Order closeHour={openHour} />
+      ) : (
+        <p>
+          We are happy to welcome you between {openHour}:00 and {closeHour}:00
+        </p>
+      )}
     </footer>
+  );
+}
+
+function Order({ openHour, closeHour }) {
+  return (
+    <div className="order">
+      <p>We're open until {closeHour}:00. Come visit us or order online.</p>
+      <button className="btn">Order</button>
+    </div>
   );
 }
 
