@@ -5,9 +5,11 @@ import Header from './components/Header';
 import Menu from './components/Manu';
 import Footer from './components/Footer';
 
+import './index.css';
+
 function App() {
   return (
-    <div>
+    <div className="container">
       <Header />
       <Menu />
       <Footer />
