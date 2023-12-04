@@ -8,17 +8,17 @@ function App() {
 
   //   next handler
   const handleNext = () => {
-    step < 3 && setStep(step + 1);
+    step < 3 && setStep((s) => s + 1);
   };
 
   //   previous button handler
   const handlePrevious = () => {
-    step > 1 && setStep(step - 1);
+    step > 1 && setStep((s) => s - 1);
   };
 
   return (
     <>
-      <button className="close" onClick={() => setOpen(!isOpen)}>
+      <button className="close" onClick={() => setOpen((is) => !is)}>
         &times;
       </button>
       {isOpen && (
