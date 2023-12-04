@@ -7,23 +7,25 @@ function App() {
 
   //   next handler
   const handleNext = () => {
-    step >= messages.length || setStep(step + 1);
+    step < 3 && setStep(step + 1);
   };
 
   //   previous button handler
   const handlePrevious = () => {
-    step <= 1 || setStep(step - 1);
+    step > 1 && setStep(step - 1);
   };
 
   return (
     <div className="steps">
       <div className="numbers">
-        <div className={`${step >= 1 ? 'active' : ''}`}>1</div>
-        <div className={`${step >= 2 ? 'active' : ''}`}>2</div>
-        <div className={`${step >= 3 ? 'active' : ''}`}>3</div>
+        <div className={step >= 1 ? 'active' : ''}>1</div>
+        <div className={step >= 2 ? 'active' : ''}>2</div>
+        <div className={step >= 3 ? 'active' : ''}>3</div>
       </div>
 
-      <div className="message">{messages[step - 1]}</div>
+      <div className="message">
+        Step-{step}: {messages[step - 1]}
+      </div>
 
       <div className="buttons">
         <button
