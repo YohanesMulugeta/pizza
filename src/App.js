@@ -1,58 +1,65 @@
-import React from 'react';
+import { useState } from 'react';
+import Main from './components/main/Main';
+import Nav from './components/Nav/Nav';
 
-const messages = ['Learn React ⚛️', 'Apply for jobs 💼', 'Invest your new income 🤑'];
+const tempMovieData = [
+  {
+    imdbID: 'tt1375666',
+    Title: 'Inception',
+    Year: '2010',
+    Poster:
+      'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg',
+  },
+  {
+    imdbID: 'tt0133093',
+    Title: 'The Matrix',
+    Year: '1999',
+    Poster:
+      'https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg',
+  },
+  {
+    imdbID: 'tt6751668',
+    Title: 'Parasite',
+    Year: '2019',
+    Poster:
+      'https://m.media-amazon.com/images/M/MV5BYWZjMjk3ZTItODQ2ZC00NTY5LWE0ZDYtZTI3MjcwN2Q5NTVkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_SX300.jpg',
+  },
+];
 
-function App() {
-  const [step, setStep] = React.useState(1);
-  const [isOpen, setOpen] = React.useState(true);
+const tempWatchedData = [
+  {
+    imdbID: 'tt1375666',
+    Title: 'Inception',
+    Year: '2010',
+    Poster:
+      'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg',
+    runtime: 148,
+    imdbRating: 8.8,
+    userRating: 10,
+  },
+  {
+    imdbID: 'tt0088763',
+    Title: 'Back to the Future',
+    Year: '1985',
+    Poster:
+      'https://m.media-amazon.com/images/M/MV5BZmU0M2Y1OGUtZjIxNi00ZjBkLTg1MjgtOWIyNThiZWIwYjRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
+    runtime: 116,
+    imdbRating: 8.5,
+    userRating: 9,
+  },
+];
 
-  //   next handler
-  const handleNext = () => {
-    step < 3 && setStep((s) => s + 1);
-  };
-
-  //   previous button handler
-  const handlePrevious = () => {
-    step > 1 && setStep((s) => s - 1);
-  };
+export default function App() {
+  const [movies, setMovies] = useState(tempMovieData);
 
   return (
     <>
-      <button className="close" onClick={() => setOpen((is) => !is)}>
-        &times;
-      </button>
-      {isOpen && (
-        <div className="steps">
-          <div className="numbers">
-            <div className={step >= 1 ? 'active' : ''}>1</div>
-            <div className={step >= 2 ? 'active' : ''}>2</div>
-            <div className={step >= 3 ? 'active' : ''}>3</div>
-          </div>
-
-          <div className="message">
-            Step-{step}: {messages[step - 1]}
-          </div>
-
-          <div className="buttons">
-            <button
-              onClick={handlePrevious}
-              //   disabled={step <= 1 ? true : false}
-              style={{ backgroundColor: '#7950f2', color: '#fff' }}
-            >
-              Previous
-            </button>
-            <button
-              onClick={handleNext}
-              //   disabled={step >= messages.length ? true : false}
-              style={{ backgroundColor: '#7950f2', color: '#fff' }}
-            >
-              Next
-            </button>
-          </div>
-        </div>
-      )}
+      <Nav movies={movies} />
+      <Main
+        movies={movies}
+        tempWatchedData={tempWatchedData}
+        tempMovieData={tempMovieData}
+      />
     </>
   );
 }
-
-export default App;
