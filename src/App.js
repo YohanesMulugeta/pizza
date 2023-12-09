@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import ListBox from './components/main/ListBox';
 import Main from './components/main/Main';
+import WatchedBox from './components/main/WatchedBox';
 import Nav from './components/Nav/Nav';
+import NumResults from './components/Nav/NumRestults';
 
 const tempMovieData = [
   {
@@ -54,12 +57,14 @@ export default function App() {
 
   return (
     <>
-      <Nav movies={movies} />
-      <Main
-        movies={movies}
-        tempWatchedData={tempWatchedData}
-        tempMovieData={tempMovieData}
-      />
+      <Nav>
+        <NumResults movies={movies} />
+      </Nav>
+
+      <Main>
+        <ListBox movies={movies} />
+        <WatchedBox tempWatchedData={tempWatchedData} />
+      </Main>
     </>
   );
 }
