@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import StarRating from './components/StarRating';
-
 // import App from './App';
 
 // import './index.css';
