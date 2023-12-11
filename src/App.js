@@ -56,18 +56,21 @@ const tempWatchedData = [
 
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
+  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   return (
     <>
       <Nav>
-        <Search setMovies={setMovies} setIsLoading={setIsLoading} />
+        <Search setMovies={setMovies} setIsLoading={setIsLoading} setError={setError} />
         <NumResults movies={movies} />
       </Nav>
 
       <Main>
         <BoxWithHideAndDisplay>
-          {isLoading ? <Loader /> : <ListBox movies={movies} />}
+          {!isLoading && !error && <ListBox movies={movies} />}
+          {error && <ErrorMessage message={error} />}
+          {isLoading && <Loader />}
         </BoxWithHideAndDisplay>
         <BoxWithHideAndDisplay>
           <WatchedBox tempWatchedData={tempWatchedData} />
@@ -79,4 +82,13 @@ export default function App() {
 
 function Loader() {
   return <p className="loader">Loading...</p>;
+}
+
+function ErrorMessage({ message }) {
+  console.log(message);
+  return (
+    <p className="error">
+      <span>☠️</span> {message}
+    </p>
+  );
 }

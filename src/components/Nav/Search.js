@@ -2,25 +2,36 @@ import { useEffect, useState } from 'react';
 
 const KEY = '83c8782f';
 
-function Search({ setMovies, setIsLoading }) {
+function Search({ setMovies, setIsLoading, setError }) {
   const [query, setQuery] = useState('');
   const [debounce, setDebounce] = useState('');
 
   useEffect(
     function () {
       (async () => {
-        if (query) {
-          setIsLoading(true);
-          const url = `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`;
+        try {
+          if (query) {
+            setIsLoading(true);
+            setError('');
 
-          const response = await fetch(url);
+            const url = `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`;
 
-          const { Search } = await response.json();
+            const res = await fetch(url);
 
-          if (Search) {
+            if (!res.ok) throw new Error('Something went wrong with fetching movies');
+
+            const { Search, Response } = await res.json();
+
+            if (Response === 'False')
+              throw new Error('Movie not found! Try with different title.');
+
             setMovies(Search);
-            setIsLoading(false);
           }
+        } catch (err) {
+          setError(err.message);
+          console.error(err);
+        } finally {
+          setIsLoading(false);
         }
       })();
     },
