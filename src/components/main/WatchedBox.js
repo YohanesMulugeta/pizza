@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import BoxWithHideAndDisplay from '../reusables/BoxWithHideAndDisplay';
+
 import Summary from './Sumarry';
 import WatchedList from './WatchedList';
 

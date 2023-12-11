@@ -6,6 +6,7 @@ import WatchedBox from './components/main/WatchedBox';
 import Nav from './components/Nav/Nav';
 import NumResults from './components/Nav/NumRestults';
 import Search from './components/Nav/Search';
+import MovieDetail from './components/main/MovieDetail';
 
 const tempMovieData = [
   {
@@ -54,26 +55,42 @@ const tempWatchedData = [
   },
 ];
 
+const KEY = '83c8782f';
+
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
+  const [selectedMovie, setMovieId] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   return (
     <>
       <Nav>
-        <Search setMovies={setMovies} setIsLoading={setIsLoading} setError={setError} />
+        <Search
+          KEY={KEY}
+          setMovies={setMovies}
+          setIsLoading={setIsLoading}
+          setError={setError}
+        />
         <NumResults movies={movies} />
       </Nav>
 
       <Main>
         <BoxWithHideAndDisplay>
-          {!isLoading && !error && <ListBox movies={movies} />}
+          {!isLoading && !error && <ListBox movies={movies} setMovieId={setMovieId} />}
           {error && <ErrorMessage message={error} />}
           {isLoading && <Loader />}
         </BoxWithHideAndDisplay>
         <BoxWithHideAndDisplay>
-          <WatchedBox tempWatchedData={tempWatchedData} />
+          {selectedMovie ? (
+            <MovieDetail
+              KEY={KEY}
+              selectedMovie={selectedMovie}
+              onCloseMovie={() => setMovieId(null)}
+            />
+          ) : (
+            <WatchedBox selectedMovie={selectedMovie} tempWatchedData={tempWatchedData} />
+          )}
         </BoxWithHideAndDisplay>
       </Main>
     </>

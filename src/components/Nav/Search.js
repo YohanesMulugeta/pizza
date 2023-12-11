@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const KEY = '83c8782f';
-
-function Search({ setMovies, setIsLoading, setError }) {
+function Search({ setMovies, setIsLoading, setError, KEY }) {
   const [query, setQuery] = useState('');
   const [debounce, setDebounce] = useState('');
 
@@ -21,6 +19,8 @@ function Search({ setMovies, setIsLoading, setError }) {
             if (!res.ok) throw new Error('Something went wrong with fetching movies');
 
             const { Search, Response } = await res.json();
+
+            console.log(Search);
 
             if (Response === 'False')
               throw new Error('Movie not found! Try with different title.');
