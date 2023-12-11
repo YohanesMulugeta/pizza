@@ -6,19 +6,21 @@ function Search({ setMovies }) {
   const [query, setQuery] = useState('');
   const [debounce, setDebounce] = useState('');
 
-  const url = `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`;
-
   useEffect(
     function () {
-      if (query)
-        fetch(url)
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            if (data.Search) setMovies(data.Search);
-          });
+      (async () => {
+        if (query) {
+          const url = `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`;
+
+          const response = await fetch(url);
+
+          const { Search } = await response.json();
+
+          if (Search) setMovies(Search);
+        }
+      })();
     },
-    [setMovies, query, url]
+    [setMovies, query]
   );
 
   useEffect(
