@@ -4,6 +4,7 @@ import Main from './components/main/Main';
 import WatchedBox from './components/main/WatchedBox';
 import Nav from './components/Nav/Nav';
 import NumResults from './components/Nav/NumRestults';
+import Search from './components/Nav/Search';
 
 const tempMovieData = [
   {
@@ -58,6 +59,7 @@ export default function App() {
   return (
     <>
       <Nav>
+        <Search setMovies={setMovies} />
         <NumResults movies={movies} />
       </Nav>
 
