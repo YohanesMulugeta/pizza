@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import BoxWithHideAndDisplay from './components/reusables/BoxWithHideAndDisplay';
 import ListBox from './components/main/ListBox';
 import Main from './components/main/Main';
 import WatchedBox from './components/main/WatchedBox';
@@ -55,18 +56,27 @@ const tempWatchedData = [
 
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <>
       <Nav>
-        <Search setMovies={setMovies} />
+        <Search setMovies={setMovies} setIsLoading={setIsLoading} />
         <NumResults movies={movies} />
       </Nav>
 
       <Main>
-        <ListBox movies={movies} />
-        <WatchedBox tempWatchedData={tempWatchedData} />
+        <BoxWithHideAndDisplay>
+          {isLoading ? <Loader /> : <ListBox movies={movies} />}
+        </BoxWithHideAndDisplay>
+        <BoxWithHideAndDisplay>
+          <WatchedBox tempWatchedData={tempWatchedData} />
+        </BoxWithHideAndDisplay>
       </Main>
     </>
   );
+}
+
+function Loader() {
+  return <p className="loader">Loading...</p>;
 }

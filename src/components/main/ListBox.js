@@ -1,6 +1,5 @@
 import MovieCard from './MovieCard';
 import MovieFeature from './MovieFeature';
-import BoxWithHideAndDisplay from '../reusables/BoxWithHideAndDisplay';
 
 function ListBox({ movies }) {
   const movieLists = movies?.map((movie) => (
@@ -9,11 +8,7 @@ function ListBox({ movies }) {
     </MovieCard>
   ));
 
-  return (
-    <BoxWithHideAndDisplay>
-      <ul className="list">{movieLists}</ul>
-    </BoxWithHideAndDisplay>
-  );
+  return <ul className="list">{movieLists}</ul>;
 }
 
 export default ListBox;

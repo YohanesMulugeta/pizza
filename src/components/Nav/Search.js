@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 const KEY = '83c8782f';
 
-function Search({ setMovies }) {
+function Search({ setMovies, setIsLoading }) {
   const [query, setQuery] = useState('');
   const [debounce, setDebounce] = useState('');
 
@@ -10,17 +10,21 @@ function Search({ setMovies }) {
     function () {
       (async () => {
         if (query) {
+          setIsLoading(true);
           const url = `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`;
 
           const response = await fetch(url);
 
           const { Search } = await response.json();
 
-          if (Search) setMovies(Search);
+          if (Search) {
+            setMovies(Search);
+            setIsLoading(false);
+          }
         }
       })();
     },
-    [setMovies, query]
+    [setMovies, query, setIsLoading]
   );
 
   useEffect(

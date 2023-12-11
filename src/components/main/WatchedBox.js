@@ -7,10 +7,10 @@ function WatchedBox({ tempWatchedData }) {
   const [watched] = useState(tempWatchedData);
 
   return (
-    <BoxWithHideAndDisplay>
+    <>
       <Summary watched={watched} />
       <WatchedList watched={watched} />
-    </BoxWithHideAndDisplay>
+    </>
   );
 }
 
